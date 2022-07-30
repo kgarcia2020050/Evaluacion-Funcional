@@ -25,6 +25,9 @@ var meses = [
 
 function validarFechas(ultimoDigito, generoPoesia) {
   var fecha = new Date();
+  var fechaActual = fecha.getDate();
+  let lastDay;
+
   if (ultimoDigito == "1" && generoPoesia == "Dramática") {
     console.log(ultimoDigito, generoPoesia);
     switch (dias[fecha.getDay()]) {
@@ -80,15 +83,35 @@ function validarFechas(ultimoDigito, generoPoesia) {
     switch (dias[ultimoDia]) {
       case "Sabado":
         fecha = Number(fecha);
-        fecha = fecha + 2 + 24 + 60 * 60 * 1000;
+        fecha = fecha - 1 * 24 * 60 * 60 * 1000;
         fecha = new Date(fecha);
 
-        return fecha;
+        if (fechaActual > fecha.getDate()) {
+          fecha = Number(fecha);
+          fecha = fecha + 9 * 24 * 60 * 60 * 1000;
+          fecha = new Date(fecha);
+          return (lastDay = new Date(
+            new Date().getFullYear(),
+            new Date().getMonth() + 2,
+            0
+          ).toLocaleDateString());
+        }
+        return fecha.toLocaleString();
       case "Domingo":
         fecha = Number(fecha);
-        fecha = fecha + 3 + 24 + 60 * 60 * 1000;
+        fecha = fecha - 2 * 24 * 60 * 60 * 1000;
         fecha = new Date(fecha);
-        return fecha;
+        if (fechaActual > fecha.getDate()) {
+          fecha = Number(fecha);
+          fecha = fecha + 9 * 24 * 60 * 60 * 1000;
+          fecha = new Date(fecha);
+          return (lastDay = new Date(
+            new Date().getFullYear(),
+            new Date().getMonth() + 2,
+            0
+          ).toLocaleDateString());
+        }
+        return fecha.toLocaleDateString();
       default:
         fecha = new Date(
           new Date().getFullYear(),
