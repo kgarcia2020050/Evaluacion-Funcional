@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState,  useContext } from "react";
 import axios from "axios";
 import "../style/registro.css";
 import Swal from "sweetalert2";
@@ -6,11 +6,6 @@ import Navbar from "./Navbar";
 
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/Contexto";
-
-import { connect } from "socket.io-client";
-
-const io = connect("http://localhost:3000");
-
 const Registro = () => {
   const { valor, setValor, poesias } = useContext(DataContext);
 
