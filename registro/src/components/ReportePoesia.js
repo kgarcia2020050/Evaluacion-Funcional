@@ -16,6 +16,7 @@ const ReportePoesia = () => {
       .get("http://localhost:3000/prueba/poesia/" + valores.poesia)
       .then((res) => {
         setUsuarios(res.data.UsuariosPoesia);
+        console.log(valores.poesia)
         if(res.data.UsuariosPoesia.length === 0){
           Swal.fire({
             icon: 'info',
@@ -40,7 +41,6 @@ const ReportePoesia = () => {
             <th scope="col">Nombre</th>
             <th scope="col">Carrera</th>
             <th scope="col">Edad</th>
-            <th scope="col">Género de poesía</th>
             <th scope="col">Fecha de registro</th>
           </tr>
         </MDBTableHead>
@@ -52,7 +52,6 @@ const ReportePoesia = () => {
                 <th scope="row">{users.nombre}</th>
                 <td>{users.carrera}</td>
                 <td>{users.edad} años</td>
-                <td>{users.generoPoesia}</td>
                 <td>{users.inscripcion}</td>
               </tr>
             </MDBTableBody>

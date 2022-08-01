@@ -39,24 +39,21 @@ const ReporteCarrera = () => {
             <th scope="col">Nombre</th>
             <th scope="col">Carrera</th>
             <th scope="col">Edad</th>
-            <th scope="col">Género de poesía</th>
             <th scope="col">Fecha de registro</th>
           </tr>
         </MDBTableHead>
-        {usuarios.map((users) => {
-          return (
-            <MDBTableBody key={users._id}>
-              <tr className="table-primary">
-                <td>{users.carnet}</td>
-                <th scope="row">{users.nombre}</th>
-                <td>{users.carrera}</td>
-                <td>{users.edad} años</td>
-                <td>{users.generoPoesia}</td>
-                <td>{users.inscripcion}</td>
-              </tr>
-            </MDBTableBody>
-          );
-        })}
+        {/* Retorno implicito */}
+        {usuarios.map((users) => (
+          <MDBTableBody key={users._id}>
+            <tr className="table-primary">
+              <td>{users.carnet}</td>
+              <th scope="row">{users.nombre}</th>
+              <td>{users.carrera}</td>
+              <td>{users.edad} años</td>
+              <td>{users.inscripcion}</td>
+            </tr>
+          </MDBTableBody>
+        ))}
       </MDBTable>
     </>
   );

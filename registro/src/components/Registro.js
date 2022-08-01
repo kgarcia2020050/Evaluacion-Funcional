@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import "../style/registro.css";
 import Swal from "sweetalert2";
 import Navbar from "./Navbar";
 
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../context/Contexto";
+
+import { connect } from "socket.io-client";
+
+const io = connect("http://localhost:3000");
+
 const Registro = () => {
+  const { valor, setValor, poesias } = useContext(DataContext);
+
   const [fecha, setFecha] = useState(Date);
   const [nombre, setNombre] = useState("");
   const [direccion, setDireccion] = useState("");
@@ -14,6 +22,22 @@ const Registro = () => {
   const [carrera, setCarrera] = useState("");
   const [poesia, setPoesia] = useState("");
   const [carnet, setCarnet] = useState("");
+
+  /* const [poesias, setPoesias] = useState([]); */
+
+  const [nuevoGenero, setNuevoGenero] = useState("");
+  /* 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/prueba/verGeneros")
+      .then((res) => {
+        console.log(valor);
+        setPoesias(res.data.Generos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [valor]); */
   var navigate = useNavigate();
 
   const agregarUsuario = (event) => {
@@ -39,6 +63,30 @@ const Registro = () => {
       })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: error.response.data.Error,
+        });
+      });
+  };
+
+  const agregarGenero = () => {
+    var genero = {
+      nombre: nuevoGenero,
+    };
+    axios
+      .post("http://localhost:3000/prueba/nuevoGenero", genero)
+      .then((res) => {
+        setValor(valor + 1);
+
+        console.log(valor);
+        setNuevoGenero("");
+        Swal.fire({
+          icon: "success",
+          title: "Genero agregado",
+        });
+      })
+      .catch((error) => {
         Swal.fire({
           icon: "error",
           title: error.response.data.Error,
@@ -140,13 +188,32 @@ const Registro = () => {
                   required
                   placeholder="Género de poesía"
                 >
-                  <option value={""} disabled selected hidden>
-                    Selecciona tu tipo de poesía
+                  <option selected disabled hidden value={""}>
+                    Selecciona tu poesia
                   </option>
-                  <option value={"Lírica"}>Lírica</option>
-                  <option value={"Épica"}>Épica</option>
-                  <option value={"Dramática"}>Dramática</option>
+                  {/*          <button>Crear nuevo genero</button> */}
+                  {poesias.map((p) => (
+                    <option key={p._id} value={p._id}>
+                      {p.nombre}
+                    </option>
+                  ))}
                 </select>
+                <br />
+                <input
+                  name="nombre"
+                  value={nuevoGenero}
+                  onChange={(n) => {
+                    setNuevoGenero(n.target.value);
+                  }}
+                  type="text"
+                />
+                <button
+                  onClick={agregarGenero}
+                  type="button"
+                  className="btn btn-outline-success"
+                >
+                  Agregar poesia (opcional)
+                </button>
               </div>
               <div className="col">
                 <div className="form-outline">

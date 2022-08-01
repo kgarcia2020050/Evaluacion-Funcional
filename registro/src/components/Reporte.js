@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Navbar from "./Navbar";
 
-
 const Reporte = () => {
   const [usuarios, setUsuarios] = useState([]);
   useEffect(() => {
@@ -36,7 +35,6 @@ const Reporte = () => {
             <th scope="col">Nombre</th>
             <th scope="col">Carrera</th>
             <th scope="col">Edad</th>
-            <th scope="col">Género de poesía</th>
             <th scope="col">Fecha de registro</th>
           </tr>
         </MDBTableHead>
@@ -48,7 +46,6 @@ const Reporte = () => {
                 <th scope="row">{users.nombre}</th>
                 <td>{users.carrera}</td>
                 <td>{users.edad} años</td>
-                <td>{users.generoPoesia}</td>
                 <td>{users.inscripcion}</td>
               </tr>
             </MDBTableBody>

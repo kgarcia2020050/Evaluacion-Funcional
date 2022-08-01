@@ -2,10 +2,28 @@ import Navbar from "./Navbar";
 
 import { Link } from "react-router-dom";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import { DataContext } from "../context/Contexto";
+
 const Inicio = () => {
-  const [poesia, setPoesia] = useState("");
+  const { poesias } = useContext(DataContext);
+  /*   const [poesias, setPoesias] = useState([]); */
   const [carrera, setCarrera] = useState("");
+  const [poesia, setPoesia] = useState();
+
+  /*   useEffect(() => {
+    axios
+      .get("http://localhost:3000/prueba/verGeneros")
+      .then((res) => {
+        console.log(valor);
+        setPoesias(res.data.Generos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [valor]); */
+
   return (
     <>
       <Navbar />
@@ -99,12 +117,14 @@ const Inicio = () => {
                   setPoesia(n.target.value);
                 }}
               >
-                <option value={""} disabled selected hidden>
-                  Selecciona un tipo de poesía
+                <option selected disabled hidden value={""}>
+                  Selecciona el genero de poesia
                 </option>
-                <option value={"lirica"}>Lírica</option>
-                <option value={"epica"}>Épica</option>
-                <option value={"dramatica"}>Dramática</option>
+                {poesias.map((p) => (
+                  <option key={p._id} value={p._id}>
+                    {p.nombre}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="modal-footer">

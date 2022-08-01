@@ -36,7 +36,6 @@ const ReporteFechas = () => {
             <th scope="col">Carnet</th>
             <th scope="col">Nombre</th>
             <th scope="col">Carrera</th>
-            <th scope="col">Género de poesía</th>
             <th scope="col">Fecha de registro</th>
             <th scope="col">Fecha de declamación</th>
           </tr>
@@ -48,7 +47,6 @@ const ReporteFechas = () => {
                 <td>{users.carnet}</td>
                 <th scope="row">{users.nombre}</th>
                 <td>{users.carrera}</td>
-                <td>{users.generoPoesia}</td>
                 <td>{users.inscripcion}</td>
                 <td>{users.fechaDeclamar}</td>
               </tr>
