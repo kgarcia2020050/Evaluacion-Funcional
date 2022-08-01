@@ -10,9 +10,10 @@
   "author": "Kenneth Garcia",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^6.3.5",
     "cors": "^2.8.5",
     "express": "^4.17.2",
-    "nodemon": "^2.0.15"
+    "mongoose": "^6.3.5",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.5.1"
   }
 }

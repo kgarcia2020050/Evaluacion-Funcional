@@ -29,7 +29,6 @@ function validarFechas(ultimoDigito, generoPoesia) {
   let lastDay;
 
   if (ultimoDigito == "1" && generoPoesia == "Dramática") {
-    console.log(ultimoDigito, generoPoesia);
     switch (dias[fecha.getDay()]) {
       case "Sabado":
         fecha = Number(fecha);
@@ -83,7 +82,7 @@ function validarFechas(ultimoDigito, generoPoesia) {
     switch (dias[ultimoDia]) {
       case "Sabado":
         fecha = Number(fecha);
-        fecha = fecha - 1 * 24 * 60 * 60 * 1000;
+        fecha = fecha + 2 * 24 * 60 * 60 * 1000;
         fecha = new Date(fecha);
 
         if (fechaActual > fecha.getDate()) {
@@ -99,7 +98,7 @@ function validarFechas(ultimoDigito, generoPoesia) {
         return fecha.toLocaleString();
       case "Domingo":
         fecha = Number(fecha);
-        fecha = fecha - 2 * 24 * 60 * 60 * 1000;
+        fecha = fecha + 1 * 24 * 60 * 60 * 1000;
         fecha = new Date(fecha);
         if (fechaActual > fecha.getDate()) {
           fecha = Number(fecha);
@@ -258,7 +257,6 @@ function registro(req, res) {
             carrera: datos.carrera,
             tipoCarrera: tipoCarrera(datos.carrera),
             generoPoesia: datos.generoPoesia,
-            tipoPoesia: tipoPoesia(datos.generoPoesia),
             inscripcion: calcularInscripcion(),
             fechaDeclamar: validarFechas(datos.carnet[5], datos.generoPoesia),
             carnet: datos.carnet,
@@ -368,7 +366,7 @@ function reportePoesia(req, res) {
     });
   } else {
     Usuarios.find(
-      { tipoPoesia: req.params.Tipo },
+      { generoPoesia: req.params.Tipo },
       (error, usuariosEncontrados) => {
         if (error)
           return res
@@ -376,19 +374,7 @@ function reportePoesia(req, res) {
             .send({ Error: "Error al buscar los usuarios" });
         return res.status(200).send({ UsuariosPoesia: usuariosEncontrados });
       }
-    );
-  }
-}
-
-function tipoPoesia(tipoPoesia) {
-  var tipo;
-  switch (tipoPoesia) {
-    case "Lírica":
-      return (tipo = "lirica");
-    case "Épica":
-      return (tipo = "epica");
-    case "Dramática":
-      return (tipo = "dramatica");
+    )
   }
 }
 

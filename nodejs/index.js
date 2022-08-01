@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const app = require("./app");
+const nuevos = require("./src/controllers/poesia.controller");
 
 mongoose.Promise = global.Promise;
 
@@ -12,6 +13,7 @@ mongoose
     console.log("Se encuentra conectado a la base de datos.");
 
     app.listen(3000, function () {
+      nuevos.crearGeneros();
       console.log("Corriendo en el puerto 3000.");
     });
   })
